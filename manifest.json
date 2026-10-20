@@ -1,0 +1,42 @@
+{
+  "name": "NewTech — iPhones",
+  "short_name": "NewTech",
+  "description": "Loja de iPhones com entrega em 24h, cupons e 12x sem juros.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230071e3'/%3E%3Ctext x='50%25' y='68%25' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-size='300' font-weight='700' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230071e3'/%3E%3Ctext x='50%25' y='68%25' font-family='-apple-system,BlinkMacSystemFont,sans-serif' font-size='300' font-weight='700' fill='white' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver produtos",
+      "short_name": "Produtos",
+      "description": "Explorar todos os iPhones",
+      "url": "./index.html#produtos"
+    },
+    {
+      "name": "Favoritos",
+      "short_name": "Favoritos",
+      "description": "Ver iPhones favoritados",
+      "url": "./index.html"
+    }
+  ]
+}

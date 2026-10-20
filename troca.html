@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Avaliação Detalhada — NewTech</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/tema.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <style>
+    .avaliacao-container { max-width: 680px; margin: 40px auto; background: var(--surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border); }
+    .avaliacao-header { text-align: center; margin-bottom: 30px; }
+    .avaliacao-header h1 { font-size: 1.8rem; color: var(--fg); margin-bottom: 8px; }
+    .avaliacao-header p { color: var(--muted); font-size: 15px; }
+    .secao-aval { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .secao-aval h3 { font-size: 16px; color: var(--accent); margin-bottom: 16px; }
+    .campo-grupo { margin-bottom: 20px; }
+    .campo-grupo label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--fg); }
+    .campo-grupo select { width: 100%; padding: 14px; border-radius: 12px; background: var(--bg-elevada); border: 1px solid var(--border); color: var(--fg); font-size: 15px; outline: none; cursor: pointer; }
+    .opcoes-radio { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .opcao-btn { display: flex; align-items: center; gap: 10px; padding: 14px; background: var(--bg-elevada); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; }
+    .opcao-btn input[type="radio"] { accent-color: var(--accent); width: 18px; height: 18px; }
+    .opcao-btn span { font-size: 14px; color: var(--fg); }
+    .resultado-container { background: var(--bg-elevada); border: 1px solid rgba(48,209,88,.3); border-radius: 20px; padding: 24px; text-align: center; margin-top: 30px; }
+    .resultado-container h2 { color: var(--muted); font-size: 14px; text-transform: uppercase; margin-bottom: 8px; }
+    .resultado-valor { font-size: 3rem; font-weight: 800; color: #30d158; margin-bottom: 10px; }
+    .btn-aplicar-desconto { display: block; width: 100%; padding: 16px; border-radius: 12px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; border: none; cursor: pointer; }
+    .btn-aplicar-desconto:disabled { opacity: .5; }
+  </style>
+</head>
+<body>
+  <main class="avaliacao-container">
+    <a href="index.html" class="voltar" style="margin-bottom:20px; display:inline-block;">← Voltar para a loja</a>
+    
+    <div class="avaliacao-header">
+      <h1>Avaliação do seu iPhone</h1>
+      <p>Responda com sinceridade. O valor final será confirmado na entrega.</p>
+    </div>
+
+    <div class="secao-aval">
+      <h3>1. Qual o seu aparelho?</h3>
+      <div class="campo-grupo">
+        <label>Modelo</label>
+        <select id="aval-modelo" onchange="ajustarArmazenamento(); calcularTotal()">
+          <option value="">Selecione</option>
+          <option value="14">iPhone 14</option>
+          <option value="13">iPhone 13</option>
+          <option value="12">iPhone 12</option>
+          <option value="11">iPhone 11</option>
+        </select>
+      </div>
+      <div class="campo-grupo">
+        <label>Armazenamento</label>
+        <select id="aval-armazenamento" onchange="calcularTotal()"></select>
+      </div>
+    </div>
+
+    <div class="secao-aval">
+      <h3>2. Como está a tela?</h3>
+      <div class="opcoes-radio">
+        <label class="opcao-btn"><input type="radio" name="tela" value="1.0" onchange="calcularTotal()" checked><span>Perfeita</span></label>
+        <label class="opcao-btn"><input type="radio" name="tela" value="0.85" onchange="calcularTotal()"><span>Riscos leves</span></label>
+        <label class="opcao-btn"><input type="radio" name="tela" value="0.6" onchange="calcularTotal()"><span>Trincada</span></label>
+        <label class="opcao-btn"><input type="radio" name="tela" value="0.4" onchange="calcularTotal()"><span>Problemas no display</span></label>
+      </div>
+    </div>
+
+    <div class="secao-aval">
+      <h3>3. Tudo está funcionando?</h3>
+      <div class="campo-grupo">
+        <label>Face ID / Touch ID</label>
+        <select id="aval-biometria" onchange="calcularTotal()">
+          <option value="0">Funciona perfeitamente</option>
+          <option value="-400">Não funciona</option>
+        </select>
+      </div>
+      <div class="campo-grupo">
+        <label>Câmeras</label>
+        <select id="aval-camera" onchange="calcularTotal()">
+          <option value="0">Funcionam perfeitamente</option>
+          <option value="-350">Câmera traseira com defeito</option>
+          <option value="-200">Câmera frontal com defeito</option>
+          <option value="-500">Ambas com defeito</option>
+        </select>
+      </div>
+      <div class="campo-grupo">
+        <label>Saúde da Bateria</label>
+        <select id="aval-bateria" onchange="calcularTotal()">
+          <option value="0">Acima de 80% (Boa)</option>
+          <option value="-300">Abaixo de 80%</option>
+          <option value="-500">Viciada / Descarrega rápido</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="secao-aval" style="border:none; margin-bottom: 0;">
+      <h3>4. O que você tem do aparelho?</h3>
+      <div class="campo-grupo">
+        <label>Acessórios e Documentos</label>
+        <select id="aval-acessorios" onchange="calcularTotal()">
+          <option value="0">Apenas o aparelho</option>
+          <option value="100">Com caixa original</option>
+          <option value="150">Com caixa e nota fiscal</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="resultado-container">
+      <h2>Valor Estimado de Entrada</h2>
+      <div class="resultado-valor" id="aval-resultado">R$ 0,00</div>
+      <p style="font-size:12px; color:#aaa; margin-bottom:15px;">*Sujeito à conferência na entrega.</p>
+      <button class="btn-aplicar-desconto" id="btn-aplicar" onclick="aplicarDesconto()" disabled>Usar como desconto</button>
+    </div>
+  </main>
+
+  <script>
+    const VALORES_BASE = {
+      '14': { '128': 2450, '256': 2600 },
+      '13': { '128': 1900, '256': 2200 },
+      '12': { '64': 1400, '128': 1500, '256': 1600 },
+      '11': { '64': 1000, '128': 1100, '256': 1250 }
+    };
+    const ARMAZENAMENTOS = { '14': ['128', '256'], '13': ['128', '256'], '12': ['64', '128', '256'], '11': ['64', '128', '256'] };
+
+    function ajustarArmazenamento() {
+      const modelo = document.getElementById('aval-modelo').value;
+      const selectArm = document.getElementById('aval-armazenamento');
+      selectArm.innerHTML = '';
+      if (!modelo || !ARMAZENAMENTOS[modelo]) {
+        selectArm.innerHTML = '<option value="">Selecione o modelo primeiro</option>';
+        return;
+      }
+      ARMAZENAMENTOS[modelo].forEach(cap => {
+        selectArm.innerHTML += `<option value="${cap}">${cap} GB</option>`;
+      });
+    }
+
+    function calcularTotal() {
+      const modelo = document.getElementById('aval-modelo').value;
+      const armazenamento = document.getElementById('aval-armazenamento').value;
+      const multiplicadorTela = parseFloat(document.querySelector('input[name="tela"]:checked').value);
+      const deducaoBiometria = parseFloat(document.getElementById('aval-biometria').value);
+      const deducaoCamera = parseFloat(document.getElementById('aval-camera').value);
+      const deducaoBateria = parseFloat(document.getElementById('aval-bateria').value);
+      const bonusAcessorios = parseFloat(document.getElementById('aval-acessorios').value);
+      const resultadoEl = document.getElementById('aval-resultado');
+      const btnAplicar = document.getElementById('btn-aplicar');
+
+      if (!modelo || !armazenamento) {
+        resultadoEl.textContent = 'R$ 0,00';
+        btnAplicar.disabled = true;
+        return;
+      }
+
+      let valor = VALORES_BASE[modelo][armazenamento];
+      valor = valor * multiplicadorTela;
+      valor = valor + deducaoBiometria + deducaoCamera + deducaoBateria + bonusAcessorios;
+      if (valor < 100) valor = 100; 
+
+      resultadoEl.textContent = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      btnAplicar.disabled = false;
+
+      window.avaliacaoAtual = {
+        modelo: modelo,
+        valor: valor,
+        detalhes: {
+          armazenamento: armazenamento + ' GB',
+          tela: document.querySelector('input[name="tela"]:checked').nextElementSibling.textContent,
+          biometria: document.getElementById('aval-biometria').selectedOptions[0].text,
+          camera: document.getElementById('aval-camera').selectedOptions[0].text,
+          bateria: document.getElementById('aval-bateria').selectedOptions[0].text,
+          acessorios: document.getElementById('aval-acessorios').selectedOptions[0].text
+        }
+      };
+    }
+
+    function aplicarDesconto() {
+      if (window.avaliacaoAtual) {
+        localStorage.setItem('newtech_troca_v1', JSON.stringify(window.avaliacaoAtual));
+        window.location.href = 'index.html#produtos';
+      }
+    }
+
+    ajustarArmazenamento();
+    calcularTotal();
+  </script>
+</body>
+</html>
