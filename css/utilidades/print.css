@@ -1,0 +1,188 @@
+/* =========================================================
+   PRINT — estilos pra impressão do comprovante
+   ========================================================= */
+
+@media print {
+  .nav,
+  .menu-drawer,
+  .menu-backdrop,
+  .banner-cupom,
+  .banner-abandono,
+  .cookie-banner,
+  .whatsapp-btn,
+  .voltar-topo,
+  .barra-comparar,
+  .toast,
+  .toast-erro,
+  .lightbox,
+  .sticky-cart,
+  .carrinho,
+  .backdrop,
+  .modal,
+  .modal-comparar,
+  .skip-link,
+  footer,
+  .pedido-acoes,
+  .btn-primario,
+  .btn-ghost,
+  .btn-compartilhar,
+  .frete-calc,
+  .chips,
+  .filtros,
+  .preco-filtro,
+  .grid-cupons,
+  .reviews-topo-acoes,
+  .review-form,
+  .reviews-abrir,
+  .review-acoes,
+  .newsletter-secao,
+  .botoes-hero,
+  .card .btn-ghost,
+  .card .wishlist,
+  .card .comparar-btn,
+  .card .selo {
+    display: none !important;
+  }
+
+  :root,
+  :root[data-tema="claro"],
+  :root[data-tema="escuro"] {
+    color-scheme: light;
+    --bg: #fff;
+    --bg-elevada: #fff;
+    --surface: #fff;
+    --surface-2: #f7f7f9;
+    --fg: #000;
+    --muted: #555;
+    --border: #ddd;
+    --border-media: #bbb;
+    --accent: #0060c0;
+    --titulo-grad-1: #000;
+    --titulo-grad-2: #333;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+  }
+
+  h1, h2, h3, h4,
+  .pagina-legal h1,
+  .pedido-sucesso h1,
+  .produto-detalhe h1,
+  .titulo-hero {
+    background: none !important;
+    -webkit-text-fill-color: #000 !important;
+    color: #000 !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+  }
+
+  .pedido-cartao,
+  .resumo-itens,
+  .resumo-valores {
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+  }
+
+  .pedido-cartao { padding: 12px 14px; }
+  .pedido-cartao h2 {
+    font-size: 10pt;
+    color: #555 !important;
+    margin-bottom: 10px;
+  }
+
+  .pedido-sucesso {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #000;
+  }
+  .pedido-icone { display: none; }
+  .pedido-sucesso h1 { font-size: 20pt; margin-bottom: 4px; }
+  .pedido-sucesso p { color: #333 !important; }
+  .pedido-numero {
+    background: #fff !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    font-size: 11pt;
+    padding: 4px 10px;
+  }
+
+  .resumo-linha {
+    color: #000 !important;
+    font-size: 11pt;
+  }
+  .resumo-total {
+    border-top: 1px solid #000 !important;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+  .resumo-total strong { font-size: 14pt; }
+  .resumo-desconto,
+  .resumo-desconto span:last-child {
+    color: #000 !important;
+  }
+
+  .item-mini {
+    width: 22px !important;
+    height: 44px !important;
+    background: #ddd !important;
+    border: 1px solid #999 !important;
+    color-mix: normal;
+  }
+
+  .pedido-info-linha {
+    font-size: 11pt;
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+  }
+  .pedido-info-linha span:first-child { color: #555 !important; }
+
+  .pedido-aviso-pagamento {
+    background: #f7f7f9 !important;
+    border: 1px solid #ddd !important;
+    color: #000 !important;
+    font-size: 10pt;
+    padding: 8px 10px;
+  }
+
+  .pedido-cartao { page-break-inside: avoid; }
+  .pedido { max-width: 100%; padding: 0; }
+
+  a { color: #000 !important; text-decoration: none !important; }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  footer {
+    display: block !important;
+    border-top: 1px solid #ddd !important;
+    padding-top: 10px;
+    text-align: center;
+    color: #666 !important;
+    font-size: 9pt;
+    margin-top: 20px;
+  }
+  footer a { color: #666 !important; font-size: 9pt; }
+}
+
+@media print {
+  body::after {
+    content: 'NewTech — newtech.com.br';
+    display: block;
+    text-align: center;
+    font-size: 8pt;
+    color: #999;
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 1px dashed #ddd;
+  }
+}

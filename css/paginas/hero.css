@@ -1,0 +1,91 @@
+/* =========================================================
+   HERO ESTILO APPLE — apenas título, subtítulo e botões
+   ========================================================= */
+.hero {
+  padding: 130px 22px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%,
+    var(--hero-bg-start) 0%,
+    var(--hero-bg-end) 55%);
+  transition: background .35s var(--ease);
+}
+
+.titulo-hero {
+  font-size: clamp(2.6rem, 7.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.02;
+  background: linear-gradient(180deg,
+    var(--titulo-grad-1) 30%,
+    var(--titulo-grad-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitulo-hero {
+  margin-top: 10px;
+  font-size: clamp(1.05rem, 2.2vw, 1.55rem);
+  color: var(--fg);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+
+.botoes-hero {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-cheio,
+.btn-contorno {
+  padding: 11px 26px;
+  border-radius: 980px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform .3s var(--ease),
+              background .3s var(--ease),
+              box-shadow .3s var(--ease);
+}
+.btn-cheio {
+  background: #0071e3;
+  color: #fff;
+}
+.btn-cheio:hover {
+  background: #0077ed;
+  transform: scale(1.04);
+  box-shadow: 0 0 0 6px rgba(0,113,227,.16);
+}
+.btn-contorno {
+  border: 1px solid #0071e3;
+  color: #4aa3ff;
+  background: transparent;
+}
+.btn-contorno:hover {
+  background: rgba(0,113,227,.12);
+  transform: scale(1.04);
+}
+
+@media (max-width: 720px) {
+  .hero { padding: 60px 16px 50px; }
+  .titulo-hero {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    letter-spacing: -.03em;
+  }
+  .subtitulo-hero { font-size: 1rem; margin-top: 6px; }
+  .botoes-hero { margin-top: 22px; gap: 8px; }
+  .btn-cheio, .btn-contorno { padding: 10px 20px; font-size: 13.5px; }
+}
+
+@media (max-width: 380px) {
+  .hero { padding: 40px 12px 36px; }
+  .titulo-hero { font-size: 1.7rem; }
+}
