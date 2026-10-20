@@ -1,0 +1,141 @@
+/* =========================================================
+   BASE — reset, variáveis, tipografia, botões e animações
+   ========================================================= */
+
+/* Propriedades registradas (transição suave de cor do iPhone) */
+@property --c1 { syntax: '<color>'; initial-value: #6b2c40; inherits: false; }
+@property --c2 { syntax: '<color>'; initial-value: #4a1e2f; inherits: false; }
+@property --c3 { syntax: '<color>'; initial-value: #2a0d18; inherits: false; }
+@property --c4 { syntax: '<color>'; initial-value: #3d1727; inherits: false; }
+@property --c5 { syntax: '<color>'; initial-value: #582536; inherits: false; }
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* =========================================================
+   VARIÁVEIS — TEMA ESCURO (padrão)
+   ========================================================= */
+:root {
+  color-scheme: dark;
+
+  --bg: #000;
+  --bg-elevada: #101013;
+  --nav-bg: rgba(0,0,0,.72);
+  --hero-bg-start: #0a0a10;
+  --hero-bg-end: #000;
+
+  --surface: #121214;
+  --surface-2: #1c1c1f;
+
+  --fg: #f5f5f7;
+  --muted: #86868b;
+  --titulo-grad-1: #ffffff;
+  --titulo-grad-2: #b0b0b8;
+
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+
+  --border: rgba(255,255,255,.10);
+  --border-media: rgba(255,255,255,.22);
+  --btn-ghost-bg: rgba(255,255,255,.09);
+  --overlay: rgba(0,0,0,.68);
+  --toast-bg: #1d1d20;
+  --toast-fg: #f5f5f7;
+  --selo-fg: #6cb2ff;
+
+  --radius: 18px;
+  --ease: cubic-bezier(.22,.7,.3,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .35s var(--ease), color .35s var(--ease);
+}
+
+body.travado { overflow: hidden; }
+
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* =========================================================
+   BOTÕES GENÉRICOS
+   ========================================================= */
+.btn-primario {
+  display: inline-block;
+  padding: 12px 26px; border-radius: 980px;
+  font-size: 15px; font-weight: 500;
+  background: var(--accent); color: #fff;
+  text-align: center;
+  transition: transform .25s var(--ease), background .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn-primario:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 0 6px rgba(0,113,227,.16);
+}
+.btn-primario:active { transform: scale(.96); }
+
+.btn-ghost {
+  padding: 10px 22px; border-radius: 980px;
+  border: 1px solid var(--border-media);
+  color: var(--fg);
+  font-size: 14px;
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.btn-ghost:hover { background: var(--btn-ghost-bg); transform: scale(1.04); }
+
+/* =========================================================
+   ANIMAÇÕES COMUNS
+   ========================================================= */
+.entra {
+  opacity: 0; transform: translateY(24px);
+  animation: entra .9s var(--ease) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes entra { to { opacity: 1; transform: none; } }
+
+.reveal {
+  opacity: 0; transform: translateY(34px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.reveal.visivel { opacity: 1; transform: none; }
+
+@keyframes pulso {
+  0%   { transform: scale(1);    opacity: 1; }
+  40%  { transform: scale(1.08); opacity: .75; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================================
+   LAYOUT GERAL / SEÇÕES
+   ========================================================= */
+.secao {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 90px 22px;
+}
+.secao h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  font-weight: 700; letter-spacing: -.025em; margin-bottom: 8px;
+}
+.secao .lead {
+  color: var(--muted); font-size: 17px; margin-bottom: 44px;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 34px 22px; text-align: center;
+  color: var(--muted); font-size: 12px;
+}

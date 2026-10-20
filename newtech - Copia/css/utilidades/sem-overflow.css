@@ -1,0 +1,255 @@
+/* =========================================================
+   SEM-OVERFLOW — mata scroll horizontal em todas as telas
+   ========================================================= */
+
+/* 1. TRAVA GLOBAL */
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+}
+
+html *, body * {
+  max-width: 100vw;
+}
+
+img, svg, video, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 2. CONTAINERS PRINCIPAIS */
+.secao,
+.hero,
+.checkout,
+.pedido,
+.pedidos,
+.pagina-produto,
+.pagina-legal,
+.landing,
+.landing-hero,
+.landing-secao,
+.landing-cta-final,
+.landing-outros,
+.modal-box,
+.modal-box-comparar {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 3. FILTROS */
+.filtros,
+.preco-filtro,
+.chips,
+.busca-wrap,
+.busca,
+.ordenacao {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 4. CHIPS */
+.chips {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chip {
+  box-sizing: border-box;
+  max-width: 90vw;
+}
+
+/* 5. SLIDER */
+.preco-slider,
+.preco-slider-track,
+.preco-slider-range {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.preco-slider input[type="range"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* 6. GRIDS */
+.grid,
+.grid-recentes,
+.grid-cupons,
+.grid-outros,
+.specs-grid,
+.beneficios,
+.checkout-grid,
+.comparar-tabela {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 7. CARDS */
+.card,
+.card-media,
+.cupom-card,
+.bloco,
+.spec-card,
+.landing-visual,
+.produto-detalhe .visual,
+.review-card,
+.pedido-cartao,
+.pedido-item {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 8. TABELAS DO COMPARADOR */
+.comparar-tabela {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.comparar-tabela > * {
+  max-width: none;
+}
+
+/* 9. NAVBAR / BANNERS / FIXOS */
+.nav,
+.nav-inner,
+.banner-cupom,
+.banner-abandono,
+.cookie-banner,
+.toast,
+.toast-erro,
+.barra-comparar,
+.sticky-cart {
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+
+/* 10. MOBILE */
+@media (max-width: 720px) {
+  .chips {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+  }
+
+  .chip {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .busca,
+  .ordenacao,
+  .cupom-input,
+  .newsletter-input,
+  .frete-calc input,
+  .campo input,
+  .campo textarea,
+  .review-campo input,
+  .review-campo textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .preco-slider {
+    overflow: hidden;
+    padding: 0 4px;
+  }
+  .preco-slider input[type="range"] {
+    padding: 0;
+    margin: 0;
+  }
+  .preco-slider input[type="range"]::-webkit-slider-thumb {
+    margin-top: 0;
+    border-width: 3px;
+  }
+
+  .busca-sugestoes {
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero,
+  .landing,
+  .landing-hero {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .secao,
+  .landing,
+  .pagina-produto,
+  .checkout,
+  .pedido,
+  .pedidos,
+  .pagina-legal {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .modal-box-comparar {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  .comparar-tabela {
+    overflow-x: auto;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* 11. TELAS MUITO PEQUENAS */
+@media (max-width: 380px) {
+  .secao,
+  .landing,
+  .pagina-produto,
+  .checkout,
+  .pedido,
+  .pedidos,
+  .pagina-legal {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .chip {
+    padding: 7px 12px;
+    font-size: 11.5px;
+  }
+}
+
+/* 12. SAFARI / iOS */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .secao,
+  .landing,
+  .checkout,
+  .pedido,
+  .pedidos,
+  .pagina-produto,
+  .pagina-legal {
+    max-width: 100%;
+    width: 100%;
+  }
+}

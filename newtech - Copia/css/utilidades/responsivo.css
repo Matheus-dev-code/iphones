@@ -1,0 +1,387 @@
+/* =========================================================
+   RESPONSIVO — mobile, tablet e telas grandes
+   ========================================================= */
+
+@media (max-width: 820px) {
+  .produto-detalhe {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .produto-detalhe .visual { padding: 50px 20px; }
+  .produto-detalhe .visual .phone { max-width: 180px; }
+
+  .checkout-grid { grid-template-columns: 1fr; }
+  .checkout-resumo { position: static; }
+}
+
+@media (max-width: 720px) {
+  /* Banner cupom */
+  .banner-cupom {
+    font-size: 11.5px;
+    padding: 8px 40px 8px 12px;
+    gap: 6px;
+    line-height: 1.3;
+  }
+  .banner-cupom-texto {
+    max-width: 62vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .banner-cupom-btn { padding: 4px 10px; font-size: 11px; }
+  .banner-cupom-fechar {
+    width: 22px; height: 22px;
+    font-size: 12px;
+    right: 8px;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: auto;
+    padding: 40px 16px 20px;
+  }
+  .titulo-hero {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    letter-spacing: -.03em;
+  }
+  .subtitulo-hero { font-size: 1rem; margin-top: 6px; }
+  .botoes-hero { margin-top: 20px; gap: 8px; }
+  .btn-cheio, .btn-contorno { padding: 10px 20px; font-size: 13.5px; }
+
+  .palco {
+    margin-top: 26px;
+    height: 380px;
+    perspective: 1200px;
+  }
+  .texto-fundo {
+    top: 30px;
+    font-size: clamp(100px, 38vw, 160px);
+    letter-spacing: -.06em;
+  }
+  .iphone-deitado {
+    --w: 150px; --h: 300px;
+    --radius: 26px;
+    --rot-base: 6deg;
+    --rot-z: 0deg;
+    --trans-y: -6px;
+  }
+  .modulo-camera { width: 34%; top: 2%; left: 5%; }
+  .botao-lateral { right: -3px; top: 30%; height: 14%; }
+  .botao-volume  { left:  -3px; top: 18%; height: 22%; }
+  .sombra-palco {
+    bottom: 14px;
+    width: 190px;
+    height: 32px;
+  }
+
+  /* Seções */
+  .secao { padding: 50px 16px; }
+  .secao h2 {
+    font-size: clamp(1.5rem, 6vw, 1.9rem);
+    margin-bottom: 6px;
+  }
+  .secao .lead { font-size: 14.5px; margin-bottom: 26px; }
+
+  /* Grade produtos */
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card {
+    padding: 20px 14px 18px;
+    border-radius: 18px;
+  }
+  .card-media { height: 130px; margin-bottom: 14px; }
+  .card-media .phone { max-width: 74px; }
+  .card h3 { font-size: 14px; }
+  .card .tag { font-size: 11.5px; min-height: 32px; margin-top: 4px; }
+  .card .preco { font-size: 12.5px; margin: 10px 0 12px; }
+  .card .btn-ghost { padding: 8px 16px; font-size: 12.5px; }
+  .card .selo { top: 10px; right: 48px; font-size: 9px; padding: 3px 8px; }
+  .card .wishlist { top: 10px; left: 10px; width: 30px; height: 30px; }
+  .card .wishlist::before { font-size: 17px; }
+  .card .comparar-btn {
+    top: 10px; right: 10px;
+    width: 30px; height: 30px;
+    font-size: 13px;
+  }
+
+  .grid-recentes { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .card-recente { padding: 16px 12px 14px; }
+  .card-recente .card-media { height: 100px; margin-bottom: 10px; }
+  .card-recente .card-media .phone { max-width: 56px; }
+  .card-recente h3 { font-size: 12.5px; }
+  .card-recente .preco { font-size: 12px; }
+
+  /* Filtros */
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .busca-wrap { width: 100%; min-width: 0; }
+  .busca { min-width: 0; padding: 12px 18px; font-size: 14px; }
+  .busca-sugestoes { max-height: 260px; border-radius: 12px; }
+  .sugestao { padding: 9px 10px; gap: 10px; }
+  .sugestao-mini { width: 18px; height: 34px; }
+  .sugestao-nome { font-size: 12.5px; }
+  .sugestao-tag { font-size: 10.5px; }
+  .sugestao-preco { font-size: 11.5px; }
+
+  .ordenacao { padding: 11px 36px 11px 16px; font-size: 13px; width: 100%; }
+
+  .chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    margin: 0 -16px;
+    padding: 2px 16px 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex-shrink: 0; padding: 8px 14px; font-size: 12.5px; }
+
+  /* Slider */
+  .preco-filtro { padding: 14px 16px; border-radius: 14px; margin-bottom: 22px; }
+  .preco-titulo { font-size: 11px; margin-bottom: 10px; }
+  .preco-slider { height: 40px; }
+  .preco-slider input[type="range"] { height: 40px; }
+  .preco-slider input[type="range"]::-webkit-slider-thumb {
+    width: 24px; height: 24px; border-width: 3px;
+  }
+  .preco-slider input[type="range"]::-moz-range-thumb {
+    width: 24px; height: 24px; border-width: 3px;
+  }
+  .preco-valores { font-size: 12.5px; margin-top: 8px; }
+
+  /* Cupons */
+  .grid-cupons { grid-template-columns: 1fr; gap: 12px; }
+  .cupom-card { padding: 18px 18px 16px; border-radius: 16px; gap: 12px; }
+  .cupom-icone { font-size: 26px; }
+  .cupom-titulo { font-size: 16px; }
+  .cupom-desc { font-size: 12px; }
+  .cupom-codigo { padding: 10px 10px 10px 14px; border-radius: 10px; }
+  .cupom-codigo code { font-size: 12.5px; }
+  .cupom-copiar { padding: 7px 12px; font-size: 11.5px; }
+
+  /* Benefícios */
+  .beneficios { grid-template-columns: 1fr; gap: 10px; }
+  .beneficio {
+    padding: 18px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .beneficio .icone {
+    font-size: 24px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .beneficio h4 { font-size: 14.5px; margin-bottom: 4px; }
+  .beneficio p { font-size: 12.5px; }
+
+  /* FAQ */
+  .faq-lista { gap: 8px; }
+  .faq-item { border-radius: 14px; }
+  .faq-pergunta { padding: 15px 18px; font-size: 13.5px; }
+  .faq-icone { width: 22px; height: 22px; font-size: 13px; }
+  .faq-resposta { padding: 0 18px 15px; }
+  .faq-resposta p { font-size: 13px; }
+
+  /* Newsletter */
+  .newsletter-secao { padding-top: 20px; padding-bottom: 70px; }
+  .newsletter { padding: 26px 20px; border-radius: 18px; }
+  .newsletter-conteudo h2 { font-size: 1.3rem; }
+  .newsletter-conteudo p { font-size: 13.5px; margin-bottom: 18px; }
+  .newsletter-form { flex-direction: column; gap: 8px; }
+  .newsletter-input { padding: 12px 18px; font-size: 14px; text-align: center; }
+  .newsletter-btn { width: 100%; padding: 13px; font-size: 14px; }
+
+  /* Barra comparador */
+  .barra-comparar {
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: 14px;
+    bottom: 78px;
+    max-width: calc(100vw - 20px);
+  }
+  .comparar-slots { gap: 5px; }
+  .comparar-slot { width: 26px; height: 44px; border-radius: 6px; }
+  .comparar-slot-remover { width: 16px; height: 16px; font-size: 9px; top: -5px; right: -5px; }
+  .comparar-texto { display: none; }
+  .comparar-limpar { display: none; }
+  .comparar-abrir { padding: 8px 14px; font-size: 12px; }
+
+  /* Modal comparar */
+  .modal-box-comparar { padding: 22px 14px 20px; border-radius: 20px; }
+  .comparar-titulo { font-size: 1.1rem; margin-bottom: 16px; }
+  .comparar-tabela {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -14px;
+    padding: 0 14px;
+  }
+  .comparar-tabela > * { min-width: 480px; }
+  .comparar-linha { grid-template-columns: 90px 1fr; gap: 10px; padding: 12px 0; }
+  .comparar-rotulo { font-size: 10px; }
+  .comparar-produto .phone { max-width: 60px; }
+  .comparar-produto h3 { font-size: 12px; }
+  .comparar-tagline { display: none; }
+  .comparar-preco { font-size: 14px; }
+  .comparar-sub { font-size: 10px; }
+  .comparar-cor { width: 14px; height: 14px; }
+  .comparar-cap { padding: 3px 8px; font-size: 10px; }
+  .comparar-add { padding: 9px; font-size: 12px; }
+
+  /* Botões flutuantes */
+  .whatsapp-btn { bottom: 16px; left: 16px; width: 44px; height: 44px; }
+  .whatsapp-btn svg { width: 20px; height: 20px; }
+  .voltar-topo { bottom: 16px; right: 16px; width: 42px; height: 42px; font-size: 17px; }
+
+  /* Carrinho */
+  .carrinho { width: 100%; max-width: 100%; }
+  .carrinho-topo { padding: 18px 20px; }
+  .carrinho-lista { padding: 14px 20px; }
+  .carrinho-rodape { padding: 16px 20px 20px; }
+  .item-mini { width: 30px; height: 60px; }
+  .item-info h4 { font-size: 13px; }
+  .item-info p { font-size: 11.5px; }
+  .item-info .item-preco { font-size: 13px; }
+  .frete-gratis { padding: 10px 12px; margin: 2px 0 12px; }
+  .frete-texto { font-size: 12px; }
+  .cupom-input { padding: 10px 14px; font-size: 12.5px; }
+  .cupom-btn { padding: 10px 14px; font-size: 12.5px; }
+  .resumo-total strong { font-size: 20px; }
+  .carrinho-rodape .btn-primario { padding: 13px; font-size: 14px; }
+
+  /* Modal */
+  .modal { padding: 10px; }
+  .modal-box { padding: 24px 18px 20px; border-radius: 20px; max-height: 94vh; }
+  .modal-grid { grid-template-columns: 1fr; gap: 20px; }
+  .modal-visual { padding: 24px 0; border-radius: 16px; }
+  .modal-visual .phone { max-width: 140px; }
+  .modal h3 { font-size: 22px; }
+  .modal .modal-tag { font-size: 13.5px; }
+  .opcao-titulo { font-size: 11px; margin: 20px 0 10px; }
+  .cor { width: 30px; height: 30px; }
+  .cap { padding: 9px 16px; font-size: 13px; }
+  .modal-preco { margin-top: 22px; padding-top: 18px; }
+  .modal-preco .valor { font-size: 24px; }
+  .modal .btn-primario { padding: 13px; font-size: 14px; }
+  .review-preview { padding: 12px 14px; }
+  .review-preview-topo strong { font-size: 12.5px; }
+  .review-preview-texto { font-size: 12.5px; }
+
+  /* Página produto */
+  .pagina-produto { padding: 24px 16px 80px; }
+  .produto-detalhe { gap: 26px; }
+  .produto-detalhe .visual { padding: 40px 16px; border-radius: 20px; }
+  .produto-detalhe .visual .phone { max-width: 160px; }
+  .produto-detalhe h1 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .produto-detalhe .tagline { font-size: 14px; }
+  .acoes-produto { gap: 8px; margin-top: 18px; }
+  .acoes-produto .btn-primario { padding: 13px; font-size: 14px; }
+  .btn-compartilhar { width: 46px; height: 46px; font-size: 17px; }
+
+  /* Reviews */
+  .reviews { margin-top: 50px; padding-top: 34px; }
+  .reviews-cabecalho h2 { font-size: 1.4rem; }
+  .reviews-resumo { padding: 12px 16px; gap: 12px; }
+  .reviews-media { font-size: 26px; }
+  .reviews-media-info .qtd { font-size: 11px; }
+  .review-form { padding: 18px; }
+  .review-card { padding: 16px 18px; }
+
+  /* Checkout */
+  .checkout { padding: 30px 16px 80px; }
+  .checkout-cabecalho h1 { font-size: 1.6rem; }
+  .bloco { padding: 20px 18px 18px; border-radius: 16px; }
+  .bloco-titulo { font-size: 15px; margin-bottom: 16px; }
+  .bloco-num { width: 24px; height: 24px; font-size: 12px; }
+  .checkout-resumo { padding: 20px; }
+
+  /* Pedido */
+  .pedido { padding: 40px 16px 80px; }
+  .pedido-icone { width: 62px; height: 62px; font-size: 30px; }
+  .pedido-sucesso h1 { font-size: 1.6rem; }
+  .pedido-cartao { padding: 20px; }
+  .pedido-cartao h2 { font-size: 13px; }
+  .pedido-info-linha { font-size: 13px; }
+
+  /* Histórico */
+  .pedidos { padding: 30px 16px 80px; }
+  .pedidos-cabecalho h1 { font-size: 1.6rem; }
+  .pedido-item { padding: 18px; }
+  .pedido-item-fim strong { font-size: 18px; }
+
+  /* 404 / offline */
+  .erro-404 { padding: 40px 20px; }
+  .erro-404 .codigo { font-size: clamp(4.5rem, 22vw, 8rem); }
+  .erro-404 h1 { font-size: 1.3rem; }
+  .offline { padding: 30px 20px; }
+  .offline-icone { font-size: 60px; }
+}
+
+@media (max-width: 480px) {
+  .titulo-hero { font-size: clamp(1.8rem, 10vw, 2.4rem); }
+  .subtitulo-hero { font-size: 0.95rem; }
+
+  .palco { height: 340px; }
+  .texto-fundo { font-size: clamp(90px, 40vw, 140px); }
+  .iphone-deitado { --w: 130px; --h: 260px; }
+  .sombra-palco { width: 160px; height: 28px; }
+
+  .grid { gap: 10px; }
+  .card { padding: 18px 12px 16px; }
+  .card-media { height: 120px; }
+  .card-media .phone { max-width: 66px; }
+  .card h3 { font-size: 13px; }
+  .card .tag { font-size: 11px; min-height: 28px; }
+
+  .whatsapp-btn { width: 40px; height: 40px; bottom: 12px; left: 12px; }
+  .voltar-topo { width: 38px; height: 38px; bottom: 12px; right: 12px; font-size: 15px; }
+  .barra-comparar { bottom: 66px; }
+
+  .comparar-tabela > * { min-width: 420px; }
+  .comparar-linha { grid-template-columns: 80px 1fr; gap: 8px; }
+  .comparar-produto .phone { max-width: 52px; }
+
+  .newsletter { padding: 22px 16px; }
+  .newsletter-conteudo h2 { font-size: 1.15rem; }
+
+  .banner-cupom-texto { max-width: 55vw; }
+}
+
+@media (max-width: 380px) {
+  .hero { padding: 30px 12px 16px; }
+  .titulo-hero { font-size: 1.7rem; }
+
+  .palco { height: 300px; }
+  .iphone-deitado { --w: 115px; --h: 230px; }
+  .texto-fundo { font-size: 80px; }
+
+  .secao { padding: 40px 12px; }
+
+  .card { padding: 16px 10px 14px; }
+  .card-media { height: 105px; }
+  .card-media .phone { max-width: 58px; }
+  .card h3 { font-size: 12px; }
+
+  .chip { padding: 7px 12px; font-size: 12px; }
+  .comparar-tabela > * { min-width: 380px; }
+}
+
+/* HAMBURGUER */
+@media (max-width: 720px) {
+  .links { display: none; }
+  .menu-btn { display: flex; }
+  .nav-inner { gap: 12px; padding: 0 14px; }
+  .logo { font-size: 16px; }
+}
+
+@media (min-width: 721px) {
+  .menu-btn { display: none; }
+  .menu-drawer { display: none !important; }
+}

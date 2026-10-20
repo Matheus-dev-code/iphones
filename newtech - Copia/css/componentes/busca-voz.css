@@ -1,0 +1,48 @@
+/* =========================================================
+   BUSCA POR VOZ — botão de microfone no input
+   ========================================================= */
+
+.busca-wrap { position: relative; }
+
+.busca-voz {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: color .25s ease, background .25s ease, transform .25s ease;
+  z-index: 5;
+}
+.busca-voz:hover {
+  color: var(--accent);
+  background: var(--btn-ghost-bg);
+}
+.busca-voz:active { transform: translateY(-50%) scale(.92); }
+
+.busca-voz.gravando {
+  color: #ff453a;
+  animation: pulsarVoz 1.2s ease-in-out infinite;
+}
+
+@keyframes pulsarVoz {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,69,58,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(255,69,58,0); }
+}
+
+.busca-wrap .busca { padding-right: 52px; }
+
+@media (max-width: 720px) {
+  .busca-voz { right: 6px; width: 32px; height: 32px; }
+  .busca-wrap .busca { padding-right: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .busca-voz.gravando { animation: none; }
+}

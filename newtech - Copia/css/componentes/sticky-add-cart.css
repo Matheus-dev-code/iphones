@@ -1,0 +1,84 @@
+/* =========================================================
+   STICKY ADD-TO-CART — botão fixo no mobile
+   ========================================================= */
+
+.sticky-cart {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 75;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--bg-elevada);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 30px rgba(0,0,0,.35);
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.22,.7,.3,1), opacity .25s ease;
+  display: none;
+}
+.sticky-cart.visivel {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sticky-cart-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sticky-cart-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sticky-cart-nome {
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sticky-cart-preco {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--fg);
+}
+
+.sticky-cart-btn {
+  padding: 14px 22px;
+  border-radius: 980px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .25s ease, transform .25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sticky-cart-btn:active { transform: scale(.96); }
+.sticky-cart-btn:hover { background: var(--accent-hover); }
+
+.sticky-cart-btn.adicionado {
+  background: #30d158;
+}
+
+@media (max-width: 720px) {
+  .sticky-cart { display: block; }
+
+  .whatsapp-btn { bottom: 88px !important; }
+  .voltar-topo { bottom: 88px !important; }
+  .barra-comparar { bottom: 88px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cart { transition: opacity .2s ease; }
+}
