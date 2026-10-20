@@ -6,7 +6,6 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Landing pages por produto -->
   <url>
     <loc>https://newtech.com.br/iphone-18-pro-max.html</loc>
     <changefreq>weekly</changefreq>
@@ -33,7 +32,6 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Páginas dinâmicas -->
   <url>
     <loc>https://newtech.com.br/produto.html?id=18-pro</loc>
     <changefreq>weekly</changefreq>
@@ -60,7 +58,6 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Institucional -->
   <url>
     <loc>https://newtech.com.br/privacidade.html</loc>
     <changefreq>monthly</changefreq>

@@ -1,8 +1,8 @@
 /* =========================================================
-   SERVICE WORKER — v37
+   SERVICE WORKER — v38 (com os 5 arquivos faltantes adicionados)
    ========================================================= */
 
-const VERSAO = 'newtech-v37';
+const VERSAO = 'newtech-v38';
 const CACHE_ESTATICO = `${VERSAO}-estatico`;
 const CACHE_DINAMICO = `${VERSAO}-dinamico`;
 
@@ -13,6 +13,7 @@ const ARQUIVOS_ESTATICOS = [
   './checkout.html',
   './pedido.html',
   './pedidos.html',
+  './troca.html',
   './privacidade.html',
   './termos.html',
   './sobre.html',
@@ -23,6 +24,9 @@ const ARQUIVOS_ESTATICOS = [
   './iphone-17-pro-max.html',
   './iphone-17.html',
   './iphone-16.html',
+  './iphone-15.html',
+  './iphone-14.html',
+  './iphone-se.html',
   './manifest.json',
   './sitemap.xml',
   './robots.txt',
