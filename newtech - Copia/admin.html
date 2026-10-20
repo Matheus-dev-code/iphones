@@ -7,7 +7,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0d0d0d; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 20px; }
-    
+
     /* Tela de Login */
     #login-container { max-width: 380px; margin: 80px auto; background: #1c1c1e; padding: 30px; border-radius: 16px; border: 1px solid #333; }
     #login-container h2 { color: #0071e3; margin-bottom: 20px; text-align: center; }
@@ -52,12 +52,25 @@
     .produto-nome { font-weight: 600; font-size: 15px; }
     .produto-qtd { color: #30d158; font-weight: bold; font-size: 14px; background: rgba(48,209,88,0.1); padding: 4px 10px; border-radius: 6px; }
 
-    /* Cards */
+    /* Cards de Pedidos */
     .card { background: #1c1c1e; border-radius: 12px; padding: 20px; margin-bottom: 15px; border: 1px solid #333; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 10px; }
-    .cliente-info { font-size: 13px; color: #aaa; margin-bottom: 10px; line-height: 1.5; }
-    .item { display: flex; justify-content: space-between; font-size: 14px; margin: 5px 0; }
-    .total { font-weight: bold; font-size: 18px; color: #30d158; text-align: right; margin-top: 10px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+    
+    .cliente-destaque {
+      background: rgba(0, 113, 227, 0.1);
+      border: 1px solid rgba(0, 113, 227, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .cliente-destaque div { font-size: 14px; line-height: 1.5; }
+    .cliente-destaque strong { color: #4aa3ff; display: block; font-size: 12px; text-transform: uppercase; margin-bottom: 2px; }
+
+    .item { display: flex; justify-content: space-between; font-size: 14px; margin: 5px 0; border-bottom: 1px solid #2a2a2a; padding-bottom: 5px; }
+    .total { font-weight: bold; font-size: 18px; color: #30d158; text-align: right; margin-top: 15px; }
 
     .status-select {
       padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 13px;
@@ -158,7 +171,6 @@
         <div class="campo"><label>Capacidades (JSON)</label><input type="text" id="prod-caps"></div>
         <div class="campo"><label>Cores e Imagens (JSON)</label><textarea id="prod-cores" rows="4" style="font-family:monospace;"></textarea></div>
         
-        <!-- NOVA SEÇÃO DE ESTOQUE -->
         <div class="campo">
           <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
             Estoque por Variação (Cor | Capacidade)
@@ -223,9 +235,7 @@
     let listaProdutosCache = [];
     let listaCuponsCache = [];
 
-    // ==========================================
     // 1. Sessão e Login
-    // ==========================================
     async function verificarSessao() {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -271,9 +281,7 @@
       document.getElementById(`aba-${aba}`).classList.add('active');
     }
 
-    // ==========================================
     // 2. PEDIDOS E DASHBOARD
-    // ==========================================
     async function carregarPedidos() {
       const loading = document.getElementById('loading-pedidos');
       const lista = document.getElementById('lista-pedidos');
@@ -289,6 +297,14 @@
 
       lista.innerHTML = data.map(p => {
         const statusAtual = p.status || 'pendente';
+        
+        // Garante que o cliente seja um objeto
+        let cli = p.cliente;
+        if (typeof cli === 'string') {
+          try { cli = JSON.parse(cli); } catch(e) { cli = {}; }
+        }
+        cli = cli || {};
+
         return `
         <div class="card" id="pedido-card-${p.id}">
           <div class="card-header">
@@ -300,19 +316,57 @@
               <option value="cancelado" ${statusAtual === 'cancelado' ? 'selected' : ''}>Cancelado</option>
             </select>
           </div>
-          <div class="cliente-info">
-            <strong>Cliente:</strong> ${p.cliente.email} | ${p.cliente.telefone}<br>
-            <strong>Entrega:</strong> ${p.cliente.endereco}, ${p.cliente.numero} - ${p.cliente.bairro}, ${p.cliente.cidade}/${p.cliente.estado}
+
+          <!-- BLOCO DE CONTATO DO CLIENTE -->
+          <div class="cliente-destaque">
+            <div>
+              <strong>Nome do Cliente</strong>
+              ${cli.nome || '<span style="color:#ff453a">Não informado</span>'}
+            </div>
+            <div>
+              <strong>WhatsApp / Tel</strong>
+              ${cli.telefone || '<span style="color:#ff453a">Não informado</span>'}
+            </div>
+            <div>
+              <strong>E-mail</strong>
+              ${cli.email || '-'}
+            </div>
+            <div>
+              <strong>Endereço Completo</strong>
+              ${cli.endereco || '-'}, ${cli.numero || 'S/N'} - ${cli.bairro || ''}<br>
+              ${cli.cidade || ''}/${cli.estado || ''} - CEP: ${cli.cep || ''}
+            </div>
           </div>
-          <div>${p.itens.map(i => `<div class="item"><span>${i.qtd}x ${i.nome} (${i.cor} / ${i.cap})</span> <span>${(i.precoUnitario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></div>`).join('')}</div>
+          
+          <!-- ITENS DO PEDIDO -->
+          <div style="margin-top:15px;">
+            <strong style="font-size:13px; color:#888; text-transform:uppercase; display:block; margin-bottom:8px;">Itens Comprados</strong>
+            ${p.itens.map(i => `<div class="item"><span>${i.qtd}x ${i.nome} (${i.cor} / ${i.cap})</span> <span>${(i.precoUnitario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></div>`).join('')}
+          </div>
+
+          <!-- DETALHES DA TROCA EXPANDIDOS -->
           ${p.troca ? `
-            <div style="margin-top:10px; padding:10px; background:rgba(48,209,88,0.1); border-radius:8px; border:1px solid rgba(48,209,88,0.3); font-size:13px; line-height: 1.4;">
-              <strong style="color:#30d158;">🔄 Troca de Aparelho:</strong><br>
-              iPhone ${p.troca.modelo} - ${p.troca.detalhes.armazenamento} | ${p.troca.detalhes.tela}<br>
-              <strong style="color:#30d158;">Abatimento: - ${(p.troca.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+            <div style="margin-top:15px; padding:15px; background:rgba(48,209,88,0.08); border-radius:8px; border:1px solid rgba(48,209,88,0.3); font-size:13px; line-height: 1.6;">
+              <strong style="color:#30d158; display:block; margin-bottom:10px; font-size:14px; border-bottom:1px solid rgba(48,209,88,0.2); padding-bottom:6px;">
+                🔄 Avaliação de Troca (Entrada)
+              </strong>
+              
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:15px; color: #ddd;">
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Aparelho</span> iPhone ${p.troca.modelo} (${p.troca.detalhes.armazenamento})</div>
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Tela</span> ${p.troca.detalhes.tela}</div>
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Face ID / Touch ID</span> ${p.troca.detalhes.biometria}</div>
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Câmeras</span> ${p.troca.detalhes.camera}</div>
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Saúde da Bateria</span> ${p.troca.detalhes.bateria}</div>
+                <div><span style="color:#888; display:block; font-size:11px; text-transform:uppercase;">Acessórios / Docs</span> ${p.troca.detalhes.acessorios}</div>
+              </div>
+              
+              <div style="padding-top:10px; border-top:1px dashed rgba(48,209,88,0.3); text-align:right;">
+                <strong style="color:#30d158; font-size:15px;">Abatimento: - ${(p.troca.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+              </div>
             </div>
           ` : ''}
-          <div class="total">Total: ${(p.total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
+          
+          <div class="total">Total a Pagar: ${(p.total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
         </div>`
       }).join('');
     }
@@ -362,9 +416,7 @@
       else carregarPedidos(); 
     }
 
-    // ==========================================
-    // 3. PRODUTOS (Com Grade de Estoque)
-    // ==========================================
+    // 3. PRODUTOS
     async function carregarProdutos() {
       const loading = document.getElementById('loading-produtos');
       const tabela = document.getElementById('tabela-produtos');
@@ -414,14 +466,10 @@
       document.getElementById('prod-caps').value = JSON.stringify(prod.variacoes || []);
       document.getElementById('prod-cores').value = JSON.stringify(info.cores || []);
       
-      // Carrega o estoque salvo
       window.estoqueAtual = info.estoqueVariacoes || {};
-      
-      // Gera a grade automaticamente
       gerarGradeEstoque();
     }
 
-    // FUNÇÃO QUE CRIA A GRADE VISUAL
     window.gerarGradeEstoque = function() {
       const grid = document.getElementById('grade-estoque');
       grid.innerHTML = '';
@@ -456,10 +504,6 @@
           grid.appendChild(div);
         });
       });
-
-      if (cores.length === 0 || caps.length === 0) {
-        grid.innerHTML = '<p style="color:#666; font-size:12px; grid-column: 1/-1;">Adicione pelo menos uma cor e uma capacidade.</p>';
-      }
     }
 
     window.atualizarEstoqueLocal = function(input) {
@@ -482,11 +526,10 @@
 
       const btn = document.getElementById('btn-salvar-prod'); btn.textContent = 'Salvando...'; btn.disabled = true;
       
-      // Junta o estoque capturado nos inputs com as infos completas
       const infosCompletas = { 
         categoria, 
         cores, 
-        estoqueVariacoes: window.estoqueAtual || {}, // <-- SALVA O ESTOQUE AQUI
+        estoqueVariacoes: window.estoqueAtual || {},
         tagline: "Produto de alta qualidade.", 
         rating: 5.0, 
         avaliacoes: 0, 
@@ -516,9 +559,7 @@
       else carregarProdutos();
     }
 
-    // ==========================================
     // 4. CUPONS
-    // ==========================================
     async function carregarCupons() {
       const loading = document.getElementById('loading-cupons');
       const tabela = document.getElementById('tabela-cupons');
