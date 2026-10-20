@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /checkout.html
-Disallow: /pedido.html
-Disallow: /pedidos.html
-
-Sitemap: https://newtech.com.br/sitemap.xml
